@@ -77,16 +77,12 @@ my @found_neg_words;
 
 print "counting instances of positive & negative words..\n";
 
-my $vote_tags = 0;
-my %wordhash;
-my $sum = 0;
 for my $i ( @new_words ) {
     if ( $i ne '' ) {
-        if ( $i eq 'vote' ) { $vote_tags++; }
-        if ( (grep { $_ eq $i } @poswords) ) {
+        if ( ( grep { $_ eq $i } @poswords) ) {
             push @found_pos_words, $i;
         }
-        elsif ( (grep { $_ eq $i } @negwords ) ) {
+        elsif ( ( grep { $_ eq $i } @negwords ) ) {
             push @found_neg_words, $i;
         }
     }
@@ -94,14 +90,14 @@ for my $i ( @new_words ) {
 
 my %f;
 for my $found (@found_pos_words) {
-    if ( (grep { $_ eq $found } @poswords ) ) {
+    if ( ( grep { $_ eq $found } @poswords ) ) {
         $f{$found}++;
     }
 }
 # create hash of positive and negative words with word and frequencies
 my %g;
 for my $found (@found_neg_words) {
-    if ( (grep { $_ eq $found } @negwords ) ) {
+    if ( ( grep { $_ eq $found } @negwords ) ) {
         $g{$found}++;
     }
 }
@@ -123,4 +119,3 @@ close $out;
 # display numerical results
 print "Found ". scalar(@found_pos_words). " total positive words\n";
 print "Found ". scalar(@found_neg_words). " total negative words\n";
-#print "Found ". $vote_tags . " vote tags\n";
